@@ -25,15 +25,15 @@ void MainWindow::on_Start_clicked()
         }
         Sound1.subWave(Arr[0],Arr[1], QString(ui->Fs->text()).toDouble(),Arr[2],Arr[3],Arr[4]);
     }
-
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Сохранение файла"),"C:/Uwu.wav",".*wav");
     wavHeader write;
-    write.createWavFile("Uwu.wav", (Sound1.Signal), Sound1.getSize());
+    write.createWavFile(fileName.toLocal8Bit(), (Sound1.Signal), Sound1.getSize());
 }
 
 void MainWindow::on_Input_clicked()
 {
     QFile file;
-    globPath=QFileDialog::getOpenFileName(nullptr,"","C::\\", "*.json");
+    globPath=QFileDialog::getOpenFileName(nullptr,"","C:\\", "*.json");
     file.setFileName(globPath);
     if(file.open(QIODevice::ReadOnly|QFile::Text)){
         doc = QJsonDocument::fromJson(QByteArray(file.readAll()),&docError);

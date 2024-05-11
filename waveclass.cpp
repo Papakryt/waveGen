@@ -18,18 +18,17 @@ float waveClass::Sig(int i){
     return 1000*A*(std::sin(F*(i-(Tb*Fs))+Phase));
 }
 
-float waveClass::getISignal(int i){
-    return Signal[i];
-}
-void waveClass::createSig(float A, float F, float Fs, float Tb, float T0, float Phase){
-    this->A=A;this->F=F;this->Fs=Fs;this->Tb=Tb;this->T0=T0;this->Phase=Phase;
-}
-
 void waveClass::subWave(float A, float F, float Fs, float Tb, float T0, float Phase){
     if (this->Size<(Tb+T0)*Fs){
-        for(int i=0;i<(Tb+T0)*Fs;i++){
-            this->Signal[i]=1000*A*(std::sin(F*(i-(Tb*Fs))+Phase))+this->Sig(i);
+        float* sSignal = new float[int((Tb+T0)*Fs)];
+        for (int i=0;i<((Tb+T0)*Fs);i++){
+            sSignal[i]=1000*A*(std::sin(F*(i-(Tb*Fs))+Phase));
         }
+
+        for (int i=0;i<((Tb+T0)*Fs);i++){
+            sSignal[i]=1000*A*(std::sin(F*(i-(Tb*Fs))+Phase))+this->Sig(i);
+        }
+        this->Signal=sSignal;
     }
     else{
         for(int i=0;i<Size;i++){

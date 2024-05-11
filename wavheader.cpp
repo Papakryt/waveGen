@@ -1,9 +1,6 @@
 #include "wavheader.h"
 
-wavHeader::wavHeader()
-{
-
-}
+wavHeader::wavHeader(){}
 
 void wavHeader::createWavFile(const char* filePath, const float* Amplitude, int VectorSize){
     int16_t Data;
