@@ -26,7 +26,7 @@ void waveClass::subWave(float A, float F, float Fs, float Tb, float T0, float Ph
         }
 
         for (int i=0;i<((Tb+T0)*Fs);i++){
-            sSignal[i]=1000*A*(std::sin(F*(i-(Tb*Fs))+Phase))+this->Sig(i);
+            sSignal[i]=sSignal[i]+this->Sig(i);
         }
         this->Signal=sSignal;
     }
